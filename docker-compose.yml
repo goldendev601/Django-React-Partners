@@ -1,0 +1,15 @@
+version: "2"
+services:
+  runtime:
+    command: gunicorn --config gunicorn.config partners.wsgi:application
+    build: .
+#    entrypoint: /bin/entrypoint.sh
+    image: partners/loginsite
+    environment:
+      USE_DOCKER: 'True'
+    volumes:
+      - .:/app
+      - ../partners.log:/logs
+    ports:
+      - 8001:8000
+    working_dir: /app
